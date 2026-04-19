@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARIE MOTORS - معلومات عن سيارات BMW</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         :root {
+            --bmw-blue: #0066b3;
+            --bmw-white: #ffffff;
+            --bmw-gray: #f5f5f5;
+            --bmw-dark: #1a1a1a;
+            --accent: #ffcc00;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bmw-dark);
+            color: var(--bmw-white);
+            overflow-x: hidden;
+        }
+        /* فيديو الخلفية لقسم البطل - شفاف */
+        
+        .video-hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            /* إزالة التعتيم الأزرق وجعله شفافاً */
+            filter: brightness(1);
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* جعل الطبقة الشفافة أخف */
+            background: linear-gradient( 45deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #fff, var(--bmw-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(0, 102, 179, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(0, 102, 179, 0.8);
+            }
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .info-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, var(--bmw-blue), #0088cc);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .info-button:hover:before {
+            left: 100%;
+        }
+        
+        .info-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 102, 179, 0.4);
+            border-color: var(--bmw-white);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        /* تصميم خلفية شعار BMW متحركة */
+        
+        .bmw-logo-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+            background: radial-gradient(circle, var(--bmw-blue) 0%, transparent 70%);
+            animation: pulse 15s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.15;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+        }
+        
+        .bmw-logo-bg:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%230066b3" stroke-width="3"/><path d="M30,30 L70,30 L70,70 L30,70 Z" fill="none" stroke="%230066b3" stroke-width="3"/><circle cx="50" cy="50" r="15" fill="none" stroke="%230066b3" stroke-width="3"/><path d="M50,35 L50,65 M35,50 L65,50" stroke="%230066b3" stroke-width="3"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.3;
+            animation: rotate 60s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        /* تصميم الهيدر */
+        
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--bmw-blue);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            color: var(--bmw-white);
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--bmw-blue);
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--bmw-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--bmw-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--bmw-blue);
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--bmw-blue);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        /* تصميم قسم السيارات */
+        
+        .cars-section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--bmw-blue);
+        }
+        
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .car-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.5s, box-shadow 0.5s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .car-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 20px 30px rgba(0, 102, 179, 0.3);
+        }
+        
+        .car-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .car-card:hover .car-image img {
+            transform: scale(1.1);
+        }
+        
+        .car-info {
+            padding: 25px;
+        }
+        
+        .car-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--bmw-white);
+        }
+        
+        .car-info p {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .spec {
+            text-align: center;
+        }
+        
+        .spec-value {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--bmw-blue);
+        }
+        
+        .spec-label {
+            font-size: 14px;
+            color: #aaaaaa;
+        }
+        /* قسم معلومات عن BMW */
+        
+        .about-section {
+            padding: 80px 5%;
+            background: rgba(0, 0, 0, 0.7);
+            margin: 40px 0;
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+            color: var(--bmw-white);
+        }
+        
+        .about-text p {
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* قسم انستجرام */
+        
+        .instagram-section {
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .instagram-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 50px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .instagram-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--bmw-white);
+        }
+        
+        .instagram-subtitle {
+            font-size: 18px;
+            color: #cccccc;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .instagram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instagram-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(220, 39, 67, 0.6);
+        }
+        
+        .instagram-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .instagram-btn:hover:before {
+            left: 100%;
+        }
+        
+        .instagram-icon {
+            font-size: 24px;
+        }
+        
+        .instagram-handle {
+            font-size: 18px;
+        }
+        /* تصميم الفوتر */
+        
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 60px 5% 30px;
+            border-top: 2px solid var(--bmw-blue);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--bmw-blue);
+        }
+        
+        .footer-column p,
+        .footer-column a {
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--bmw-blue);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--bmw-blue);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888888;
+            font-size: 14px;
+        }
+        /* تصميم متجاوب */
+        
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            nav ul {
+                gap: 15px;
+            }
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .info-button,
+            .instagram-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- خلفية شعار BMW متحركة -->
+    <div class="bmw-logo-bg"></div>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">M</div>
+                <h1>MARIE <span>MOTORS</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#cars">السيارات</a></li>
+                    <li><a href="#about">عن BMW</a></li>
+                    <li><a href="#instagram">انستجرام</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- قسم البطل مع الفيديو -->
+    <section class="video-hero" id="home">
+        <video class="background-video" autoplay muted loop playsinline>
+            <!-- اختر أحد هذه الفيديوهات -->
+            <source src="The BMW M3 Competition _ lost soul _ 4K.mp4" type="video/mp4">
+            <!-- فيديو بديل 1 -->
+            <source src="The BMW M3 Competition _ lost soul _ 4K.mp4" type="video/mp4">
+            <!-- فيديو محلي -->
+            <source src="The BMW M3 Competition _ lost soul _ 4K.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+
+        <div class="hero-content">
+            <h2>اكتشف عالم BMW الفاخرة</h2>
+            <p>موقع معلوماتي شامل عن سيارات BMW - استكشف تاريخها العريق وتصاميمها المميزة وتقنياتها المتطورة</p>
+            <a href="#cars" class="info-button">
+                <i class="fas fa-car"></i> استكشف المعلومات
+            </a>
+        </div>
+
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+            <p>قم بالتمرير للأسفل</p>
+        </div>
+    </section>
+
+    <!-- قسم السيارات -->
+    <section class="cars-section" id="cars">
+        <div class="section-title">
+            <h2>سيارات BMW المميزة</h2>
+        </div>
+
+        <div class="cars-grid">
+            <!-- سيارة 1 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="bmw-m8-coupe-onepager-sp-desktop.jpg.asset.1642518221018.jpg" alt="BMW M8">
+                </div>
+                <div class="car-info">
+                    <h3>BMW M8 Competition</h3>
+                    <p>سيارة كوبيه فاخرة تجمع بين الفخامة والأداء الرياضي المتميز. تتميز بمحرك V8 سعة 4.4 لتر بقوة 625 حصان.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">625 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">3.2 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">305 كم/س</div>
+                            <div class="spec-label">السرعة القصوى</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 2 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="2025-bmw-x7-101-65d51e47938f4.avif" alt="BMW X7">
+                </div>
+                <div class="car-info">
+                    <h3>BMW X7 M50i</h3>
+                    <p>أكبر SUV في مجموعة BMW، تجمع بين الفخامة والمساحة الواسعة والأداء القوي. مثالية للعائلات والرحلات الطويلة.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">530 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">4.7 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">7 مقاعد</div>
+                            <div class="spec-label">السعة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 3 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="bmw-i8-uk-road-test-2014-008.jpg" alt="BMW i8">
+                </div>
+                <div class="car-info">
+                    <h3>BMW i8 Roadster</h3>
+                    <p>سيارة هجينة رياضية بمحرك كهربائي وبنزين، تتميز بتصميم مستقبلي وأداء متميز مع كفاءة في استهلاك الوقود.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">374 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">4.6 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">هجين</div>
+                            <div class="spec-label">نوع الوقود</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 4 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="P90403633_highRes_bmw-m5-competition.webp" alt="BMW M5">
+                </div>
+                <div class="car-info">
+                    <h3>BMW M5 Competition</h3>
+                    <p>سيارة سيدان رياضية عالية الأداء، تجمع بين راحة السيارات الفاخرة وأداء السيارات الرياضية في طراز واحد.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">625 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">3.3 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">AWD</div>
+                            <div class="spec-label">نظام الدفع</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 5 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="2023-bmw-z4-m40i-4.jpeg" alt="BMW Z4">
+                </div>
+                <div class="car-info">
+                    <h3>BMW Z4 M40i</h3>
+                    <p>سيارة كابريوليه رياضية بمحرك سداسي الأسطوانات توربو، تتميز بتصميم أنيق وأداء متميز على الطرقات المفتوحة.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">340 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">4.5 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">مكشوفة</div>
+                            <div class="spec-label">النوع</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 6 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="9ec37287-fcc7-45fd-99df-2e6bea3cdbef_LHD+BMW+X5+M+Exterior+2.jpg" alt="BMW X5">
+                </div>
+                <div class="car-info">
+                    <h3>BMW X5 M Competition</h3>
+                    <p>سيارة SUV رياضية عالية الأداء، تجمع بين قوة المحرك المتقدمة وتصميمها الرياضي الجريء مع تقنيات القيادة المتطورة.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">625 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">3.8 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">5 مقاعد</div>
+                            <div class="spec-label">السعة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 7 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="ce4240aacc9842468ea8b70409f1620d.jpg" alt="BMW 7 Series">
+                </div>
+                <div class="car-info">
+                    <h3>BMW 7 Series</h3>
+                    <p>سيارة سيدان فاخرة تمثل قمة الرفاهية والتكنولوجيا في مجموعة BMW، مصممة لتقديم أقصى درجات الراحة والرفاهية.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">530 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">4.3 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">فاخرة</div>
+                            <div class="spec-label">الفئة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 8 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="BMW-i4-M50-006-low-res.jpeg" alt="BMW i4">
+                </div>
+                <div class="car-info">
+                    <h3>BMW i4 M50</h3>
+                    <p>سيارة كهربائية رياضية تجمع بين الأداء المتميز والكفاءة العالية، مع مدى قيادة يصل إلى 590 كم بشحنة واحدة.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">544 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">3.9 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">590 كم</div>
+                            <div class="spec-label">المدى</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- سيارة 9 -->
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="m3.jpg" alt="BMW M3">
+                </div>
+                <div class="car-info">
+                    <h3>BMW M3 Competition</h3>
+                    <p>سيارة سيدان رياضية أسطورية تتميز بمحرك سداسي الأسطوانات وتصميم رياضي جريء، مع تقنيات قيادة متطورة.</p>
+                    <div class="car-specs">
+                        <div class="spec">
+                            <div class="spec-value">510 HP</div>
+                            <div class="spec-label">قوة المحرك</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">3.8 ث</div>
+                            <div class="spec-label">0-100 كم/س</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">290 كم/س</div>
+                            <div class="spec-label">السرعة القصوى</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم معلومات عن BMW -->
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>عن شركة BMW</h2>
+                <p>بي إم دبليو (Bayerische Motoren Werke) هي شركة ألمانية متعددة الجنسيات لتصنيع السيارات الفاخرة والدراجات النارية ومحركات الطائرات. تأسست في عام 1916، وتعد واحدة من أبرز شركات السيارات الفاخرة في العالم.</p>
+                <p>اشتهرت BMW بسياراتها الرياضية والفاخرة التي تجمع بين التصميم الأنيق والأداء المتميز. تنتج الشركة مجموعة واسعة من السيارات تشمل السيدان، الكوبيه، سيارات الدفع الرباعي، والسيارات الكهربائية.</p>
+                <p>يقع المقر الرئيسي لشركة BMW في ميونخ، ألمانيا، وتعد من أكبر الشركات المصنعة للسيارات الفاخرة في العالم، مع وجود في أكثر من 150 دولة.</p>
+            </div>
+            <div class="about-image">
+                <img src="BMWM_XXL.jpg" alt="BMW Headquarters">
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم انستجرام -->
+    <section class="instagram-section" id="instagram">
+        <div class="instagram-container">
+            <h2 class="instagram-title">تابعنا على انستجرام</h2>
+            <p class="instagram-subtitle">لا تفوت أحدث صور سيارات BMW ومقاطع الفيديو الحصرية. تابع حسابنا على انستجرام لمشاهدة المزيد من المحتوى المميز عن سيارات BMW الفاخرة.</p>
+            <a href="https://www.instagram.com/4ad.1" target="_blank" class="instagram-btn">
+                <i class="fab fa-instagram instagram-icon"></i>
+                <span class="instagram-handle">@4ad.1</span>
+            </a>
+            <p style="color: #cccccc; margin-top: 15px;">انقر فوق الزر للذهاب مباشرة إلى صفحتنا على انستجرام</p>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>MARIE MOTORS</h3>
+                <p>موقع معلوماتي شامل عن سيارات BMW الفاخرة. نقدم أحدث المعلومات والتفاصيل التقنية عن موديلات BMW المختلفة.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/4ad.1" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>معلومات BMW</h3>
+                <p>تاريخ التأسيس: 1916</p>
+                <p>المقر الرئيسي: ميونخ، ألمانيا</p>
+                <p>الشركة الأم: مجموعة BMW</p>
+                <p>المنتجات: سيارات فاخرة، دراجات نارية</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>أقسام الموقع</h3>
+                <a href="#home">الرئيسية</a>
+                <a href="#cars">السيارات</a>
+                <a href="#about">عن BMW</a>
+                <a href="#instagram">انستجرام</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>الموقع</h3>
+                <p>© 2025 MARIE MOTORS. جميع الحقوق محفوظة.</p>
+                <p>هذا موقع معلوماتي غير تجاري.</p>
+                <p>تم إنشاء الموقع لأغراض تعليمية ومعلوماتية.</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>MARIE MOTORS &copy; 2025 -BMW الفاخرة</p>
+        </div>
+    </footer>
+
+    <script>
+        // تأثيرات تفاعلية بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            // التحكم في الفيديو
+            const video = document.querySelector('.background-video');
+            const videoSection = document.querySelector('.video-hero');
+
+            // مراقبة ظهور قسم الفيديو
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(e => {
+                            console.log('تعذر تشغيل الفيديو تلقائياً');
+                        });
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            videoObserver.observe(videoSection);
+
+            // إضافة تأثيرات للبطاقات عند التمرير
+            const carCards = document.querySelectorAll('.car-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            carCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'opacity 0.8s, transform 0.8s';
+                observer.observe(card);
+            });
+
+            // التأكد من أن زر الانستجرام يعمل
+            const instagramBtn = document.querySelector('.instagram-btn');
+            if (instagramBtn) {
+                instagramBtn.addEventListener('click', function(e) {
+                    this.setAttribute('target', '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
