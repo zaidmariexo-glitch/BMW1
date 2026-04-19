@@ -1,6 +1,1 @@
-# BMW Project
-هذا مشروع خاص بـ ...
-
-## طريقة التشغيل
-1. حمّل المشروع
-2. شغّل الملف ...
+https://zaidmariexo-glitch.github.io/BMW1/
